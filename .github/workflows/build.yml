@@ -41,6 +41,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: flappyBug/tau-note
+          token: ${{ secrets.TAU_NOTE_PAT }}
       - name: setup node
         uses: actions/setup-node@v3
         with:
