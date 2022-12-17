@@ -1,6 +1,17 @@
 name: "Build"
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        required: true
+        default: "warning"
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
 jobs:
   create-release:
     runs-on: ubuntu-20.04
@@ -75,7 +86,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies and build
         run: pnpm install && pnpm build
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
